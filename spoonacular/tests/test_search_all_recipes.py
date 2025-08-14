@@ -8,14 +8,14 @@ from spoonacular.request.query import recipes_complex_search
 
 logger = logging.getLogger(__name__)
 
-# Search through recipes
+
 @pytest.mark.all_tests
-def test_search():
+def test_recipe_search_query():
     search_string = "Apple"
     url = BASE_URL + recipes_complex_search + "?" + API_KEY + "&query=" + search_string
     title_without_search_string = []
     title_with_search_string = []
-    logger.info(f"Starting search for {search_string} test")
+    logger.info(f"Starting test and searching for {search_string}")
 
     response = requests.request("GET", url, headers=HEADERS)
 
@@ -36,4 +36,4 @@ def test_search():
     logger.info(f"Ending search for {search_string} test")
 
 #  pytest -m all_tests
-#  pytest -s test_search_recipes.py::test_search
+#  pytest -s test_search_all_recipes.py::test_recipe_search_query
