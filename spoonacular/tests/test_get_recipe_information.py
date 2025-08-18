@@ -29,7 +29,7 @@ def get_recipe_id() -> int:
     return recipe_id
 
 @pytest.mark.all_tests
-def test_get_recipe_information():
+def test_get_recipe_information() -> None:
     recipe_id = get_recipe_id()
     if recipe_id == 0:
         pytest.skip(logger.info("No recipes found"))

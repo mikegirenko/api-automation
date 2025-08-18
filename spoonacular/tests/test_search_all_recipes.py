@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 @pytest.mark.all_tests
-def test_recipe_search_query():
+def test_recipe_search_query() -> None:
     search_string = "Apple"
     url = BASE_URL + recipes_complex_search + "?" + API_KEY + "&query=" + search_string
     title_without_search_string = []
