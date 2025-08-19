@@ -11,7 +11,6 @@ from spoonacular.request.query import recipes_complex_search, recipes
 logger = logging.getLogger(__name__)
 
 
-
 def get_recipe_id() -> int:
     search_string = "Boar"
     recipe_id = None
@@ -34,12 +33,12 @@ def test_get_recipe_information() -> None:
     if recipe_id == 0:
         pytest.skip(logger.info("No recipes found"))
     url = BASE_URL + recipes + "/" + str(recipe_id) + "/" + "information" + "?" + API_KEY
-    logger.info(f"Starting test to get recipe information")
+    logger.info("Starting test to get recipe information")
     response = requests.request("GET", url, headers=HEADERS)
 
     assert response.json()["id"] == recipe_id
 
-    logger.info(f"Ending test to get recipe information")
+    logger.info("Ending test to get recipe information")
 
 #  pytest -m all_tests
 #  pytest -s test_get_recipe_information.py::test_get_recipe_information
