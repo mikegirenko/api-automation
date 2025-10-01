@@ -2,7 +2,8 @@ import pytest
 import requests
 import logging
 
-from spoonacular.common.common import API_KEY, BASE_URL
+from spoonacular.test_data.hardcoded import API_KEY
+from spoonacular.namespace_urls.namespace_urls import BASE_URL
 from spoonacular.request.headers import HEADERS
 from spoonacular.request.query import recipes_complex_search
 
@@ -17,7 +18,7 @@ def test_recipe_search_query() -> None:
     title_with_search_string = []
     logger.info(f"Starting test and searching for {search_string}")
 
-    response = requests.request("GET", url, headers=HEADERS)
+    response = requests.request("GET", url, headers=HEADERS, verify=False)
 
     # I am not sure why (and it might be a defect) but search returns recipes without "Apple" in the title.
     # So, I am simply collecting all titles and confirming some have it and some do not

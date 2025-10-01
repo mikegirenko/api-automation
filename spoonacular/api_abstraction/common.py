@@ -1,4 +1,4 @@
 """
-common for http and graphql client
-wait_for
+Functions common for both http and graphql client
+wait_for()
 """
