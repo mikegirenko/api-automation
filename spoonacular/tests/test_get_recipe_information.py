@@ -7,34 +7,20 @@ import logging
 from spoonacular.test_data.hardcoded import API_KEY
 from spoonacular.namespace_urls.namespace_urls import BASE_URL
 from spoonacular.request.headers import HEADERS
-from spoonacular.request.query import recipes_complex_search, recipes
+from spoonacular.request.query import recipes
+from spoonacular.user_api_abstraction.user_api_abstraction import get_recipe_id
 
 logger = logging.getLogger(__name__)
 
 
-def get_recipe_id() -> int:
-    search_string = "Boar"
-    recipe_id = None
-    url = BASE_URL + recipes_complex_search + "?" + API_KEY + "&query=" + search_string
-    response = requests.request("GET", url, headers=HEADERS, verify=False)
-    # handling scenario when no recipes or more than one returned
-    if len(response.json()["results"]) == 0:
-        recipe_id = 0
-    if len(response.json()["results"]) == 1:
-        recipe_id = response.json()["results"][0]["id"]
-    if len(response.json()["results"]) > 1:
-        selected_recipe = random.choice(response.json()["results"])
-        recipe_id = selected_recipe["id"]
-
-    return recipe_id
-
 @pytest.mark.all_tests
 def test_get_recipe_information() -> None:
-    recipe_id = get_recipe_id()
+    logger.info("Starting test to get recipe information")
+    recipe_id = get_recipe_id("Boar")
     if recipe_id == 0:
         pytest.skip(logger.info("No recipes found"))
     url = BASE_URL + recipes + "/" + str(recipe_id) + "/" + "information" + "?" + API_KEY
-    logger.info("Starting test to get recipe information")
+
     response = requests.request("GET", url, headers=HEADERS, verify=False)
 
     assert response.json()["id"] == recipe_id
