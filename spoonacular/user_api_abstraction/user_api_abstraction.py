@@ -1,6 +1,5 @@
 """
-functions to perform user actions
- answer_something()
+functions to perform user or an endpoint actions
 """
 import random
 
