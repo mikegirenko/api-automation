@@ -19,13 +19,16 @@ def test_get_recipe_information() -> None:
     recipe_id = get_recipe_id("Boar")
     if recipe_id == 0:
         pytest.skip(logger.info("No recipes found"))
-    url = BASE_URL + recipes + "/" + str(recipe_id) + "/" + "information" + "?" + API_KEY
+    url = (
+        BASE_URL + recipes + "/" + str(recipe_id) + "/" + "information" + "?" + API_KEY
+    )
 
     response = requests.request("GET", url, headers=HEADERS, verify=False)
 
     assert response.json()["id"] == recipe_id
 
     logger.info("Ending test to get recipe information")
+
 
 #  pytest -m all_tests
 #  pytest -s test_get_recipe_information.py::test_get_recipe_information

@@ -1,5 +1,3 @@
-import random
-
 import pytest
 import requests
 import logging
@@ -19,14 +17,25 @@ def test_get_recipe_taste() -> None:
     recipe_id = get_recipe_id("Apple")
     if recipe_id == 0:
         pytest.skip(logger.info("No recipes found"))
-    url = BASE_URL + recipes + "/" + str(recipe_id) + "/" + "tasteWidget.json" + "?" + API_KEY
-
+    url = (
+        BASE_URL
+        + recipes
+        + "/"
+        + str(recipe_id)
+        + "/"
+        + "tasteWidget.json"
+        + "?"
+        + API_KEY
+    )
+    print("URL", url)
     response = requests.request("GET", url, headers=HEADERS, verify=False)
 
     logger.info("Confirm response has all seven tastes.")
     assert len(response.json()) == 7
 
-    logger.info("Confirm tastes are between 0 and 100 while the spiciness value is an open scale of 0 and above.")
+    logger.info(
+        "Confirm tastes are between 0 and 100 while the spiciness value is an open scale of 0 and above."
+    )
     for k, v in response.json().items():
         if k == "spiciness":
             assert v >= 0

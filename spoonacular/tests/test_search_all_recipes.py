@@ -36,5 +36,6 @@ def test_recipe_search_query() -> None:
 
     logger.info(f"Ending search for {search_string} test")
 
+
 #  pytest -m all_tests
 #  pytest -s test_search_all_recipes.py::test_recipe_search_query
