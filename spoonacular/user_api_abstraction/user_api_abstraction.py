@@ -1,6 +1,7 @@
 """
 functions to perform user or an endpoint actions
 """
+
 import random
 
 import requests
